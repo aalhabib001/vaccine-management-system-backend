@@ -12,7 +12,8 @@ const userSchema = new Schema({
             message: `{VALUE} is not an email`,
             isAsync: false
         },
-        required: true
+        required: true,
+        unique: true
     },
     name: {
         type: String,
