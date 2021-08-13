@@ -12,14 +12,14 @@ const loginController = (req, res, next) => {
                 bcrypt.compare(password, user.password, (err, result) => {
 
                     if (err) {
-                        res.json({
+                        res.status(500).json({
                             massage: 'Error Occurred'
                         });
                     }
 
                     if (result) {
                         let token = jwt.sign({email: user.email, name: user.name}, 'SECRET', {expiresIn: '240h'})
-                        res.json({
+                        res.status(200).json({
                             massage: 'Login Successful',
                             data: {
                                 tokenType: 'Bearer',
@@ -27,14 +27,14 @@ const loginController = (req, res, next) => {
                             }
                         });
                     } else {
-                        res.json({
+                        res.status(401).json({
                             massage: 'Password Does not match'
                         });
                     }
                 })
 
             } else {
-                res.json({
+                res.status(404).json({
                     massage: 'User Not found'
                 });
             }
