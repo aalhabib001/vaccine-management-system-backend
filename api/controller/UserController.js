@@ -13,14 +13,14 @@ const loginController = (req, res, next) => {
 
                     if (err) {
                         res.status(500).json({
-                            massage: 'Error Occurred'
+                            message: 'Error Occurred'
                         });
                     }
 
                     if (result) {
                         let token = jwt.sign({email: user.email, name: user.name}, 'SECRET', {expiresIn: '240h'})
                         res.status(200).json({
-                            massage: 'Login Successful',
+                            message: 'Login Successful',
                             data: {
                                 tokenType: 'Bearer',
                                 token
@@ -28,20 +28,20 @@ const loginController = (req, res, next) => {
                         });
                     } else {
                         res.status(401).json({
-                            massage: 'Password Does not match'
+                            message: 'Password Does not match'
                         });
                     }
                 })
 
             } else {
                 res.status(404).json({
-                    massage: 'User Not found'
+                    message: 'User Not found'
                 });
             }
         })
         .catch(err => {
             res.json({
-                massage: err
+                message: err
             });
         })
 }
@@ -63,7 +63,7 @@ const registerController = (req, res, next) => {
         user.save()
             .then(result => {
                 res.status(201).json({
-                    massage: 'User Registered',
+                    message: 'User Registered',
                 })
             })
             .catch(error => {
@@ -96,14 +96,14 @@ const getUser = (req, res) => {
 
             } else {
                 res.status(200).json({
-                    massage: 'User Not found'
+                    message: 'User Not found'
                 });
             }
         })
         .catch(err => {
             console.log(err)
             res.json({
-                massage: err
+                message: err
             });
         })
 
